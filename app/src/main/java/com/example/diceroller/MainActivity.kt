@@ -2,24 +2,21 @@ package com.example.diceroller
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.widget.Button
-import android.widget.ImageView
+import com.example.diceroller.databinding.ActivityMainBinding
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var diceImage: ImageView
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
-        val rollButton: Button = findViewById(R.id.roll_button)
-        rollButton.setOnClickListener {
-            rollDice()
-        }
+        binding = ActivityMainBinding.inflate(layoutInflater)
 
-        diceImage = findViewById(R.id.dice_image)
+        binding.rollButton.setOnClickListener { rollDice() }
+
+        setContentView(binding.root)
     }
 
     private fun rollDice() {
@@ -33,6 +30,6 @@ class MainActivity : AppCompatActivity() {
             else -> R.drawable.dice_6
         }
 
-        diceImage.setImageResource(drawableResource)
+        binding.diceImage.setImageResource(drawableResource)
     }
 }
